@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MoviesApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_progress">Baixando informações dos filmes</string>
+    <string name="error_load_movies">Falha ao obter lista de filmes</string>
+    <string name="error_no_connection">Sex conexão</string>
+</resources>
