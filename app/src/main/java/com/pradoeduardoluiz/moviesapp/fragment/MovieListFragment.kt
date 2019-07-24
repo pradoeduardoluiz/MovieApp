@@ -1,11 +1,11 @@
 package com.pradoeduardoluiz.moviesapp.fragment
 
-import android.os.AsyncTask
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.pradoeduardoluiz.moviesapp.R
@@ -23,6 +23,7 @@ class MovieListFragment : Fragment(), CoroutineScope {
     private var downloadJob:Job?= null
     private var movies = mutableListOf<Movie>()
     private var adapter = MovieAdapter(movies, this::onItemClick)
+    private var searcView:SearchView? = null
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
@@ -40,6 +41,7 @@ class MovieListFragment : Fragment(), CoroutineScope {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_movie_list, container, false)
+
     }
 
     companion object {
@@ -114,4 +116,10 @@ class MovieListFragment : Fragment(), CoroutineScope {
         downloadJob = null
     }
 
+    fun search(text:String){
+        adapter.filter.filter(text)
+    }
+    fun clearSearch(){
+        adapter.filter.filter("")
+    }
 }
