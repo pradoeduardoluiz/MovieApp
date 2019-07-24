@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".fragment.MovieDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/item_background">
+
+        <ImageView
+                android:id="@+id/imgBackdropPath"
+                android:layout_width="390dp"
+                android:layout_height="326dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="8dp" android:layout_marginEnd="8dp"
+                app:layout_constraintHorizontal_bias="0.545" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"/>
+
+        <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imgMovie"
+                android:layout_toEndOf="@+id/imgMovie"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/imgBackdropPath"
+                app:layout_constraintStart_toStartOf="parent" android:textStyle="bold" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp" android:layout_marginRight="8dp" android:layout_marginEnd="8dp"/>
+
+        <TextView
+                android:id="@+id/txtReleaseDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorItemText"
+                android:textSize="@dimen/item_text_size"
+                android:layout_below="@+id/txtTitle"
+                android:layout_alignLeft="@+id/txtTitle"
+                android:layout_alignStart="@+id/txtTitle"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+                android:layout_marginStart="8dp" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <RatingBar
+                style="?android:attr/ratingBarStyleSmall"
+                android:id="@+id/rbVoteAvarage"
+                android:numStars="10"
+                android:isIndicator="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/imgMovie"
+                android:layout_toRightOf="@+id/imgMovie"
+                android:tint="@color/colorItemStar"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtReleaseDate"
+                app:layout_constraintStart_toEndOf="@+id/imgMovie"
+                android:layout_marginStart="8dp" android:layout_marginLeft="8dp"/>
+        <TextView
+                android:id="@+id/txtRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/colorItemText"
+                app:layout_constraintTop_toBottomOf="@+id/txtReleaseDate"
+                app:layout_constraintStart_toEndOf="@+id/rbVoteAvarage"/>
+
+        <TextView
+                android:id="@+id/txtGenero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorItemText"
+                android:textSize="@dimen/item_text_size"
+                app:layout_constraintTop_toBottomOf="@id/rbVoteAvarage"
+                android:ellipsize="end" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"/>
+
+        <TextView
+                android:id="@+id/txtRunTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorItemText"
+                android:textSize="@dimen/item_text_size"
+                app:layout_constraintTop_toBottomOf="@id/txtGenero"
+                android:ellipsize="end" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"/>
+
+        <TextView
+                android:id="@+id/txtBudget"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorItemText"
+                android:textSize="@dimen/item_text_size"
+                app:layout_constraintTop_toBottomOf="@id/txtRunTime"
+                android:ellipsize="end" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"/>
+
+        <TextView
+                android:id="@+id/txtRevenue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorItemText"
+                android:textSize="@dimen/item_text_size"
+                app:layout_constraintTop_toBottomOf="@id/txtBudget"
+                android:ellipsize="end" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"/>
+
+        <TextView
+                android:id="@+id/txtOverview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorItemText"
+                android:textSize="@dimen/item_text_size"
+                app:layout_constraintTop_toBottomOf="@id/txtRevenue"
+                android:ellipsize="end" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"/>
+
+        <ProgressBar
+                android:id="@+id/progressBarDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/txtMessageDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtOverview"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

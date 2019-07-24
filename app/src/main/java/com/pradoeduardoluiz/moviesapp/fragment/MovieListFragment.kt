@@ -45,7 +45,6 @@ class MovieListFragment : Fragment(), CoroutineScope {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_movie_list, container, false)
-
     }
 
     companion object {
@@ -54,6 +53,7 @@ class MovieListFragment : Fragment(), CoroutineScope {
 
         fun newInstance(): MovieListFragment {
             return MovieListFragment()
+
         }
     }
 
@@ -120,7 +120,15 @@ class MovieListFragment : Fragment(), CoroutineScope {
     }
 
 
-    private fun onItemClick(movie: Movie) {}
+    private fun onItemClick(movie: Movie) {
+
+        val fragment = MovieDetailsFragment.newInstance(movie)
+        fragmentManager!!.beginTransaction()
+            .replace(R.id.fragmentList, fragment, MovieDetailsFragment.TAG_MOVIE_DETAILS)
+            .addToBackStack(TAG_LIST_MOVIE)
+            .commit()
+        searcView?.setOnQueryTextListener(null)
+    }
 
     private fun showProgress(show: Boolean) {
         if (show) {

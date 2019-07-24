@@ -18,7 +18,7 @@ class Movie(
     @SerializedName("release_date")
     var releaseDate: String = "",
     @SerializedName("genres")
-    var genres: List<Int> ?= null,
+    var genres: List<Genres> ?= null,
     @SerializedName("original_title")
     var originalTitle:String = "",
     @SerializedName("original_language")
@@ -32,7 +32,14 @@ class Movie(
     @SerializedName("vide")
     var video:Boolean = false,
     @SerializedName("vote_average")
-    var voteAverage: Float = 0.0f
+    var voteAverage: Float = 0.0f,
+    @SerializedName("runtime")
+    var runTime:Int = 0,
+    @SerializedName("budget")
+    var budget:Float = 0.0f,
+    @SerializedName("revenue")
+    var revenue:Float = 0.0f
+
 ) {
     override fun toString() = title
 }

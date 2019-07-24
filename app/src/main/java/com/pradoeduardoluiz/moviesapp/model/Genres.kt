@@ -1,7 +1,12 @@
 package com.pradoeduardoluiz.moviesapp.model
 
+import com.google.gson.annotations.SerializedName
+
 class Genres (
-    var id:Long = 0,
+
+    @SerializedName("id")
+    var id:Int = 0,
+    @SerializedName("name")
     var name:String = "")
 {
     override fun toString() = this.name
