@@ -12,11 +12,11 @@ import com.pradoeduardoluiz.moviesapp.util.POSTER_URL
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MovieAdapter (
-    private var movies: List<Movie>,
+    private var movies: MutableList<Movie>,
     private val onItemClick: (Movie) -> Unit
 ):RecyclerView.Adapter<MovieAdapter.ViewHolder>(), Filterable{
 
-    private var moviesSearchList:List<Movie> = emptyList()
+    private var moviesSearchList:MutableList<Movie> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -36,8 +36,14 @@ class MovieAdapter (
         holder.bind(movie, onItemClick)
     }
 
-    fun loadItems(movies: List<Movie>){
+    fun loadItems(movies: MutableList<Movie>){
         this.moviesSearchList = movies
+        notifyDataSetChanged()
+    }
+
+    fun addData(newMovies:MutableList<Movie>){
+        moviesSearchList.addAll(newMovies)
+        notifyDataSetChanged()
     }
 
     override fun getFilter(): Filter {

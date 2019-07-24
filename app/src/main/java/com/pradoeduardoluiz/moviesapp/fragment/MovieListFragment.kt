@@ -7,6 +7,7 @@ import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.pradoeduardoluiz.moviesapp.R
 import com.pradoeduardoluiz.moviesapp.adapter.MovieAdapter
@@ -24,6 +25,9 @@ class MovieListFragment : Fragment(), CoroutineScope {
     private var movies = mutableListOf<Movie>()
     private var adapter = MovieAdapter(movies, this::onItemClick)
     private var searcView:SearchView? = null
+    private var page:Int = 0
+    private var totalPage = 99
+    private var loading = false
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
@@ -60,6 +64,21 @@ class MovieListFragment : Fragment(), CoroutineScope {
         val layoutManager = LinearLayoutManager(requireContext())
         rvMovie.layoutManager = layoutManager
 
+
+        rvMovie.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val linearLayoutManager = rvMovie.layoutManager as LinearLayoutManager?
+
+                if (!loading && linearLayoutManager!!.itemCount <=
+                    linearLayoutManager.findLastVisibleItemPosition() + 2){
+                    loading = true
+                    nextPageOfMovies()
+                }
+            }
+        })
+
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -81,6 +100,25 @@ class MovieListFragment : Fragment(), CoroutineScope {
         }
     }
 
+    fun nextPageOfMovies(){
+        page++
+
+        if (page <= totalPage){
+
+            if (downloadJob == null) {
+                if (MovieHttp.hasConection(requireContext())) {
+                    startDownloadJson()
+                } else {
+                    progressBar.visibility = View.GONE
+                    txtMessage.setText(R.string.error_no_connection)
+                }
+            }else if (downloadJob?.isActive == true){
+                showProgress(true)
+            }
+
+        }
+    }
+
 
     private fun onItemClick(movie: Movie) {}
 
@@ -93,14 +131,29 @@ class MovieListFragment : Fragment(), CoroutineScope {
     }
 
     private fun startDownloadJson() {
+
         downloadJob = launch {
             showProgress(true)
-            val movieTask = withContext(Dispatchers.IO){
-                MovieHttp.loadMoviesGson()
+            val responseTask = withContext(Dispatchers.IO){
+                MovieHttp.loadMoviesGson(page)
             }
-            updateMovieList(movieTask)
+            page = responseTask!!.page
+            totalPage = responseTask!!.totalPages
+            if (page <= 1){
+                updateMovieList(responseTask?.movies)
+            }else
+            {
+                addMoviesToAdapter(responseTask.movies)
+            }
+
             showProgress(false)
         }
+    }
+
+    private fun addMoviesToAdapter(movies: List<Movie>) {
+        adapter.addData(movies.toMutableList())
+        loading = false
+        downloadJob = null
     }
 
     private fun updateMovieList(result: List<Movie>?) {
